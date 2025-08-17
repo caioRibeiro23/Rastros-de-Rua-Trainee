@@ -287,6 +287,7 @@
                 
             <input type="hidden" name="img_arte_atual" value="<?= $post->img_arte ?>">
             <input type="hidden" name="img_tag_atual" value="<?= $post->img_tag ?>">
+            <input type="hidden" name="usuarios_id" value="<?php echo ($_SESSION['id']); ?>">
                                 
             <input type="hidden" name="tipo" value="<?= $post->tipo ?>">
 
@@ -358,15 +359,14 @@
                 <div class="dataEditar">
                     <p>Estilo</p>
                     <select class="select-localizacao" name="tipo" required>
-                        <option value="#" selected><?=$post->tipo?></option>
-                        <option value="1">Tag / Pixo</option>
-                        <option value="2">Throw-up</option>
-                        <option value="3">Bubble Style</option>
-                        <option value="4">Wildstyle</option>
-                        <option value="5">3D Style</option>
-                        <option value="6">Realismo</option>
-                        <option value="7">Personagens</option>
-                        <option value="8">Fades / Degradê</option>
+                        <option value="1" <?=$post->tipo == 'Tag / Pixo' ? 'selected': ''?> >Tag / Pixo</option>
+                        <option value="2" <?=$post->tipo == 'Throw-up' ? 'selected': ''?>>Throw-up</option>
+                        <option value="3" <?=$post->tipo == 'Bubble Style' ? 'selected': ''?>>Bubble Style</option>
+                        <option value="4" <?=$post->tipo == 'Wildstyle' ? 'selected': ''?>>Wildstyle</option>
+                        <option value="5" <?=$post->tipo == '3D Style' ? 'selected': ''?>>3D Style</option>
+                        <option value="6" <?=$post->tipo == 'Realismo' ? 'selected': ''?>>Realismo</option>
+                        <option value="7" <?=$post->tipo == 'Personagens' ? 'selected': ''?>>Personagens</option>
+                        <option value="8" <?=$post->tipo == 'Fades / Degradê' ? 'selected': ''?>>Fades / Degradê</option>
                     </select>
                 </div>
             </div>

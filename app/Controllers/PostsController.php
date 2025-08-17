@@ -103,20 +103,16 @@ class PostsController
             $caminhoTag = $_POST['img_tag_atual'];
         }
 
-
         $parameters = [
             'titulo'        => $_POST['titulo'],
             'autor'         => $_POST['autor'],
             'descricao'     => $_POST['descricao'],
             'materiais'     => $_POST['materiais'],
-            'latitude'      => $_POST['latitude'],
-            'longitude'     => $_POST['longitude'],
-            'local'         => $_POST['local'],
-            'usuarios_id'   => $_SESSION['id'],
-            
+            'id_localizacao'=> $_POST['localizacao'],
+            'id_usuario'    => $_POST['usuarios_id'],
             'img_arte'      => $caminhoImg,
             'img_tag'       => $caminhoTag,
-            'tipo'          => $_POST['tipo'],
+            'tipo'          => $_POST['tipo']
             ];
         $id= $_POST['id'];
 
