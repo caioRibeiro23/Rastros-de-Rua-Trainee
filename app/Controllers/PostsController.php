@@ -22,12 +22,16 @@ class PostsController
         if($inicio > $num_linhas){
                 return redirect('admin/pagina-de-posts');
         }
+
+        $localizacoes = App::get('database')->findLocalizacoes();
+
         $posts = App::get('database')->selectAll('posts', $inicio, $itens_page);
         $total_pages = ceil($num_linhas /$itens_page);
         return view('admin/pagina-de-posts', [
                 'posts' => $posts,
                 'page' => $page,
-                'total_pages' => $total_pages
+                'total_pages' => $total_pages,
+                'localizacoes' => $localizacoes
         ]);
     }
 
@@ -46,18 +50,15 @@ class PostsController
 
         $caminhoTag= "public/assets/imagensPosts/" . $nomeTag; 
 
-        move_uploaded_file($tempTag, $caminhoTag);    
+        move_uploaded_file($tempTag, $caminhoTag); 
 
         $parameters = [
             'titulo'        => $_POST['titulo'],
             'autor'         => $_POST['autor'],
             'descricao'     => $_POST['descricao'],
             'materiais'     => $_POST['materiais'],
-            'latitude'      => $_POST['latitude'],
-            'longitude'     => $_POST['longitude'],
-            'local'         => $_POST['local'],
-            'usuarios_id'   => $_POST['usuarios_id'],
-
+            'id_localizacao'   => $_POST['localizacao'],
+            'id_usuario'   => $_POST['usuarios_id'],
             'img_arte'      => $caminhoImg,
             'img_tag'       => $caminhoTag,
             'tipo'          => $_POST['tipo'],
