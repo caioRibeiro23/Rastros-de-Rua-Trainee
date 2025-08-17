@@ -30,10 +30,6 @@
                 <img src="/public/assets/Mascote.png" alt="Mascote" class="mascote" id="mascote-secreto">
                 <img src="/public/assets/Logo Branca rastros.png" alt="Logo Branca" class="logo-branca">
             </div>
-            <div class="assinatura-ej">
-                <div class="titulo">Code Jr</div>
-                <img src="/public/assets/code logo branca.png" alt="Code Jr" class="imagem">
-            </div>
         </div>
 
         <!-- Segunda Linha  -->

@@ -22,7 +22,7 @@ class QueryBuilder
         
         $statement = $this->pdo->prepare($sql);
         $statement->execute([$id]);
-        return $statement->fetch(\PDO::FETCH_ASSOC);
+        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
     public function selectOne($table, $parameters, $id=null){        

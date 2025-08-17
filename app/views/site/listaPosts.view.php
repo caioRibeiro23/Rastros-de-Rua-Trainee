@@ -44,7 +44,7 @@
             <ul class="listaDePosts">
                 <?php foreach($posts as $post): ?>
                     <li>
-                        <a href="/listaPosts/<?=$post->id?>" class="post">
+                        <a href="/listaPosts/<?=$post->id_post?>" class="post">
                             <img src="/<?= $post->img_arte?>" class="fotoCapa">
                             <img src="/<?= $post->img_tag?>" class="fotoTag">
                             <div class="textoPost">
