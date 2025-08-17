@@ -13,20 +13,23 @@ class QueryBuilder
         $this->pdo = $pdo;
     }
 
-    public function selectOne($table, $parameters, $id=null){
+    public function selectOne($table, $parameters, $id=null){        
         $sql = sprintf(
             'SELECT * FROM %s WHERE %s = :%s',
             $table,
             implode(', ', array_keys($parameters)),
             implode(', :', array_keys($parameters))
         );
+
+        $idColumn = $table == 'posts' ? 'id_post' : 'id_usuario';
+
         try{
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute($parameters);
             $dados = $stmt->fetch(PDO::FETCH_OBJ);
             if ($dados) {
                 if ($id !== null) {
-                    if ($id == $dados->id) {
+                    if (isset($dados->{$idColumn}) && $id == $dados->{$idColumn}) {
                         return null;
                     }
                     return $dados;
@@ -91,12 +94,14 @@ public function selectAll($table, $inicio = 0, $itens_page = 10)
 
     public function update ($table,$parameters, $id)
     {
-        $sql=sprintf('UPDATE %s SET %s WHERE id = :id',
+        $idColumn = $table == 'posts' ? 'id_post' : 'id_usuario';
+
+        $sql=sprintf('UPDATE %s SET %s WHERE %s = :id',
             $table,
             implode(', ', array_map(function($parameters){
                 return $parameters . ' = :' . $parameters;
-            },array_keys($parameters)))
-
+            },array_keys($parameters))),
+            $idColumn
         );
 
         $parameters['id'] = $id;
