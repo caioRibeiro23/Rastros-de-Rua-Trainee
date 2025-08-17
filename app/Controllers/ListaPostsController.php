@@ -18,22 +18,22 @@ class ListaPostsController
                 }
                 $itens_page = 6;
                 $inicio = $itens_page * $page - $itens_page;
-                $num_posts = App::get('database')->countAll('publicacoes');
+                $num_posts = App::get('database')->countAll('posts');
 
                 if($inicio > $num_posts){
                         return redirect('site/listaPosts');
                 }
-                $posts = App::get('database')->selectAll('publicacoes', $inicio, $itens_page);
+                $posts = App::get('database')->selectAll('posts', $inicio, $itens_page);
                 $total_pages = ceil($num_posts / $itens_page);
                 return view('site/listaPosts', [
                         'posts' => $posts,
                         'page' => $page,
                         'total_pages' => $total_pages
-                ],);
+                ]);
         }
         public function exibirPost($id)
         {
-            $post = App::get('database')->findById('publicacoes', $id);
+            $post = App::get('database')->findById('posts', $id);
         
             return view('site/postIndividual', ['post' => $post]);
         }
@@ -80,7 +80,7 @@ class ListaPostsController
             $itens_page = 6;
             $inicio = $itens_page * $page - $itens_page;
             if($tipo == ''){
-                    $todosPosts = App::get('database')->selectAll('publicacoes', 0, 10000); // pega todos
+                    $todosPosts = App::get('database')->selectAll('posts', 0, 10000); // pega todos
             }
             else {
                 $todosPosts = App::get('database')->buscaPorTipo($tipo);

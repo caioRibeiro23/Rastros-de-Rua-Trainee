@@ -18,7 +18,7 @@ class QueryBuilder
             'SELECT * FROM %s WHERE %s = :%s',
             $table,
             implode(', ', array_keys($parameters)),
-            implode(', :', array_keys($parameters)),
+            implode(', :', array_keys($parameters))
         );
         try{
             $stmt = $this->pdo->prepare($sql);
@@ -42,7 +42,7 @@ class QueryBuilder
 
 public function selectAll($table, $inicio = 0, $itens_page = 10)
 {
-    $sql = "SELECT * FROM {$table} ORDER BY id DESC LIMIT {$inicio}, {$itens_page}";
+    $sql = "SELECT * FROM {$table} ORDER BY id_post DESC LIMIT {$inicio}, {$itens_page}";
 
     try {
         $stmt = $this->pdo->prepare($sql);
@@ -115,7 +115,7 @@ public function selectAll($table, $inicio = 0, $itens_page = 10)
         try {
             if($table == 'usuarios'){
                 $posts_delete = sprintf('DELETE FROM %s WHERE %s',
-                    'publicacoes', 
+                    'posts', 
                     'usuarios_id = :id'  
                 );
                 $stmt = $this->pdo->prepare($posts_delete);
@@ -155,7 +155,7 @@ public function selectAll($table, $inicio = 0, $itens_page = 10)
     }
 
 public function buscaPorTitulo($titulo){
-    $sql = 'SELECT * FROM publicacoes WHERE titulo LIKE :titulo ORDER BY id DESC';
+    $sql = 'SELECT * FROM posts WHERE titulo LIKE :titulo ORDER BY id DESC';
 
     try {
 
@@ -172,7 +172,7 @@ public function buscaPorTitulo($titulo){
 }
 
 public function buscaPorTipo($tipo){
-    $sql = 'SELECT * FROM publicacoes WHERE tipo = :tipo ORDER BY id DESC';
+    $sql = 'SELECT * FROM posts WHERE tipo = :tipo ORDER BY id DESC';
 
     try {
         $stmt = $this->pdo->prepare($sql);

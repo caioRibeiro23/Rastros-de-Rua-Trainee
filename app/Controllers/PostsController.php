@@ -17,12 +17,12 @@ class PostsController
         }
         $itens_page = 5;
         $inicio = $itens_page * $page - $itens_page;
-        $num_linhas = App::get('database')->countAll('publicacoes');
+        $num_linhas = App::get('database')->countAll('posts');
 
         if($inicio > $num_linhas){
                 return redirect('admin/pagina-de-posts');
         }
-        $posts = App::get('database')->selectAll('publicacoes', $inicio, $itens_page);
+        $posts = App::get('database')->selectAll('posts', $inicio, $itens_page);
         $total_pages = ceil($num_linhas /$itens_page);
         return view('admin/pagina-de-posts', [
                 'posts' => $posts,
@@ -63,7 +63,7 @@ class PostsController
             'tipo'          => $_POST['tipo'],
         ];
 
-        App::get('database')->insert('publicacoes', $parameters);
+        App::get('database')->insert('posts', $parameters);
 
         header('Location: /posts');
     }
@@ -119,7 +119,7 @@ class PostsController
             ];
         $id= $_POST['id'];
 
-        App::get('database')->update('publicacoes', $parameters, $id);
+        App::get('database')->update('posts', $parameters, $id);
 
         header('Location: /posts');
     }
@@ -127,7 +127,7 @@ class PostsController
     public function delete(){
         $id = $_POST['id'];
 
-        APP::get('database')->delete('publicacoes', $id);
+        APP::get('database')->delete('posts', $id);
 
         header('Location: /posts');
     }

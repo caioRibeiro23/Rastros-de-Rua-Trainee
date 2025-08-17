@@ -2,7 +2,7 @@
 
 return [
     'database' => [
-        'name' => 'rastros_rua_db',
+        'name' => 'rastros_rua_db_2_ (7)',
         'username' => 'root',
         'password' => '',
         'connection' => 'mysql:host=127.0.0.1',

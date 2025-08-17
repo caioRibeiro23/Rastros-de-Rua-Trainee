@@ -13,7 +13,7 @@
             return view('admin/dashboard');
         }
         public function exibirLandingPage(){
-            $posts = App::get('database')->selectAll('publicacoes', 0, 100); // ou outro método para buscar posts
+            $posts = App::get('database')->selectAll('posts', 0, 100); // ou outro método para buscar posts
             return view('site/paginaInicial', compact('posts'));
         }
 

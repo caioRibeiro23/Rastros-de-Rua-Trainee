@@ -33,7 +33,7 @@
 							foreach ($ultimos5 as $post) : ?>
 							<div class="swiper-slide">
 								<div class="conteudo-card-pag-inicial">
-									<a class="card-carrossel-pag-inicial" href="/listaPosts/<?=$post->id?>" style="text-decoration: none; color: inherit;">
+									<a class="card-carrossel-pag-inicial" href="/listaPosts/<?=$post->id_post?>" style="text-decoration: none; color: inherit;">
 										<div class="imagem-card-pag-inicial">
 											<img class="imagem-obra-pag-inicial"
 												src="<?= $post->img_arte ?>">

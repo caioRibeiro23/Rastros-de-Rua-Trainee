@@ -9,7 +9,7 @@ class PagInicialController
 {
     public function exibirPaginaInicial()
     {
-        $posts = App::get('database')->selectAll('publicacoes', 0, 5);
+        $posts = App::get('database')->selectAll('posts', 0, 5);
         return view('site/paginaInicial', ['posts' => $posts]);
     }
 }
