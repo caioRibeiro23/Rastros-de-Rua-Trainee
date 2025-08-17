@@ -68,10 +68,10 @@
                             <td><?= (new DateTime($post->data))->format('d/m/Y')?></td> 
 
                             <td class="operacoes">
-                                <button><i class="bi bi-eye-fill" onclick="abrirModal('fundoVisualizar<?= $post->id ?>','idModalVisualizar<?= $post->id ?>')"></i></button>
+                                <button><i class="bi bi-eye-fill" onclick="abrirModal('fundoVisualizar<?= $post->id_post ?>','idModalVisualizar<?= $post->id_post ?>')"></i></button>
                                 <?php if ($_SESSION['adm'] == 1 || $post->id_usuario == $_SESSION['id']): ?>
-                                    <button><i class="bi bi-pencil-square" onclick="abrirModal('fundoEditar<?= $post->id ?>','idModalEditar<?= $post->id ?>',<?= $post->id ?>)"></i></button>
-                                    <button><i class="bi bi-trash-fill" onclick="abrirModal('fundo-modal-excluir-post<?= $post->id ?>','modal-excluir-post<?= $post->id ?>',<?= $post->id ?> )"></i></button>
+                                    <button><i class="bi bi-pencil-square" onclick="abrirModal('fundoEditar<?= $post->id_post ?>','idModalEditar<?= $post->id_post ?>',<?= $post->id_post ?>)"></i></button>
+                                    <button><i class="bi bi-trash-fill" onclick="abrirModal('fundo-modal-excluir-post<?= $post->id_post ?>','modal-excluir-post<?= $post->id_post ?>',<?= $post->id_post ?> )"></i></button>
                                 <?php endif; ?>
                             </td>
                         </tr>
@@ -211,9 +211,9 @@
         <?php foreach($posts as $post): ?>   
         
         <!-- Modal Excluir -->
-        <div onclick="fecharModal('fundo-modal-excluir-post<?= $post->id ?>','modal-excluir-post<?= $post->id ?>')" class="overlay-excluir-post" id="fundo-modal-excluir-post<?= $post->id ?>"></div>
-        <form class="modal-excluir-post" id="modal-excluir-post<?= $post->id ?>" method="POST" action="/posts/delete" enctype="multipart/form-data">
-            <input type="hidden" name="id" id="input-id-excluir" value="<?= $post->id ?>">
+        <div onclick="fecharModal('fundo-modal-excluir-post<?= $post->id_post ?>','modal-excluir-post<?= $post->id_post ?>')" class="overlay-excluir-post" id="fundo-modal-excluir-post<?= $post->id_post ?>"></div>
+        <form class="modal-excluir-post" id="modal-excluir-post<?= $post->id_post ?>" method="POST" action="/posts/delete" enctype="multipart/form-data">
+            <input type="hidden" name="id" id="input-id-excluir" value="<?= $post->id_post ?>">
             <div class="cabecalho-modal-excluir-post">
                 <div class="icone-modal-excluir-post">
                     <i class="bi bi-trash-fill"></i>
@@ -227,12 +227,12 @@
             </div>
             <div class="botoes-modal-excluir-post">
                 <button class="botao-modal-excluir-post confirmar" type="submit">Excluir</button>
-                <button class="botao-modal-excluir-post cancelar" type="button" onclick="fecharModal('fundo-modal-excluir-post<?= $post->id ?>','modal-excluir-post<?= $post->id ?>')">Cancelar</button>
+                <button class="botao-modal-excluir-post cancelar" type="button" onclick="fecharModal('fundo-modal-excluir-post<?= $post->id_post ?>','modal-excluir-post<?= $post->id_post ?>')">Cancelar</button>
             </div>
         </form>
         <!--Modal visualizar-->
-        <div onclick="fecharModal('idModalVisualizar<?= $post->id ?>','fundoVisualizar<?= $post->id ?>')" class="modalVisualizar" id="fundoVisualizar<?= $post->id ?>"> </div>
-            <div class="visualizar" id="idModalVisualizar<?= $post->id ?>">
+        <div onclick="fecharModal('idModalVisualizar<?= $post->id_post ?>','fundoVisualizar<?= $post->id_post ?>')" class="modalVisualizar" id="fundoVisualizar<?= $post->id_post ?>"> </div>
+            <div class="visualizar" id="idModalVisualizar<?= $post->id_post ?>">
                 <div class="tituloModalVisualizar">
                     <p>Visualizar Publicação</p>
                 </div>
@@ -283,24 +283,24 @@
                     </div>
                 </div>
                 <div class="botaoVisualizar">
-                    <button class="visualizarBotao" onclick="fecharModal('fundoVisualizar<?= $post->id ?>','idModalVisualizar<?= $post->id ?>')">Fechar</button>
+                    <button class="visualizarBotao" onclick="fecharModal('fundoVisualizar<?= $post->id_post ?>','idModalVisualizar<?= $post->id_post ?>')">Fechar</button>
                 </div>
             </div>
         </div>
         <!--Modal editar-->
-        <div onclick="fecharModal('idModalEditar<?= $post->id ?>','fundoEditar<?= $post->id ?>')" class="modalEditar" id="fundoEditar<?= $post->id ?>"></div>
-        <form class="editar" id="idModalEditar<?= $post->id ?>" method="POST" action="/posts/edit" enctype="multipart/form-data">
-            <input type="hidden" name="latitude" id="latitudeEditar<?= $post->id ?>" value="0" required>
-            <input type="hidden" name="longitude" id="longitudeEditar<?= $post->id ?>" value="0" required>
+        <div onclick="fecharModal('idModalEditar<?= $post->id_post ?>','fundoEditar<?= $post->id_post ?>')" class="modalEditar" id="fundoEditar<?= $post->id_post ?>"></div>
+        <form class="editar" id="idModalEditar<?= $post->id_post ?>" method="POST" action="/posts/edit" enctype="multipart/form-data">
+            <input type="hidden" name="latitude" id="latitudeEditar<?= $post->id_post ?>" value="0" required>
+            <input type="hidden" name="longitude" id="longitudeEditar<?= $post->id_post ?>" value="0" required>
                 
             <input type="hidden" name="img_arte_atual" value="<?= $post->img_arte ?>">
             <input type="hidden" name="img_tag_atual" value="<?= $post->img_tag ?>">
                 
-            <input type="hidden" name="local" id="nomeDoLocalInputEditar<?= $post->id ?>" value="<?= $post->local ?>">
+            <input type="hidden" name="local" id="nomeDoLocalInputEditar<?= $post->id_post ?>" value="<?= $post->local ?>">
                 
             <input type="hidden" name="tipo" value="<?= $post->tipo ?>">
 
-            <input type="hidden" name="id" value="<?= $post->id ?>">
+            <input type="hidden" name="id" value="<?= $post->id_post ?>">
             <div class="tituloModalEditar">
                 <p>Editar Publicação</p>
             </div>
@@ -308,15 +308,15 @@
                 <div class="arteEditar">
                     <p>Arte</p>
                     <div class="arteInput"> 
-                        <input id="inputArte<?= $post->id?>" class="inputImg" type="file" name="img_arte" onchange="trocaImagem('<?= $post->id?>')">
-                        <label id="labelArte<?= $post->id?>" for="inputArte<?= $post->id?>" class="labelImgArte">
-                            <img id="imagemAtualEditar<?= $post->id?>" src="<?= $post->img_arte ?>"/>
+                        <input id="inputArte<?= $post->id_post?>" class="inputImg" type="file" name="img_arte" onchange="trocaImagem('<?= $post->id_post?>')">
+                        <label id="labelArte<?= $post->id_post?>" for="inputArte<?= $post->id_post?>" class="labelImgArte">
+                            <img id="imagemAtualEditar<?= $post->id_post?>" src="<?= $post->img_arte ?>"/>
                             <div class="conteudoArteInput">
                                 <p>Selecionar nova imagem</p>
                                 <i class="bi bi-upload"></i>
                             </div>
                         </label>
-                        <img id="previewArte<?= $post->id?>" src="" alt="Pré-visualização" style="display: none;" />
+                        <img id="previewArte<?= $post->id_post?>" src="" alt="Pré-visualização" style="display: none;" />
                     </div>
                 </div>
                 <div class="camposEditar">
@@ -331,15 +331,15 @@
                     <div class="tagEditar">
                         <p>Tag</p>
                         <div class="tagInput">
-                            <input id="inputTag<?= $post->id?>" class="inputImg" type="file" name="img_tag" onchange="trocaImagemTag('<?= $post->id?>')">
-                            <label id="labelTag<?= $post->id?>" for="inputTag<?= $post->id?>" class="labelImgTag">
-                                <img id="imagemAtualTag<?= $post->id?>"src="<?= $post->img_tag ?>"/>
+                            <input id="inputTag<?= $post->id_post?>" class="inputImg" type="file" name="img_tag" onchange="trocaImagemTag('<?= $post->id_post?>')">
+                            <label id="labelTag<?= $post->id_post?>" for="inputTag<?= $post->id_post?>" class="labelImgTag">
+                                <img id="imagemAtualTag<?= $post->id_post?>"src="<?= $post->img_tag ?>"/>
                                 <div class="conteudoTagInput">
                                     <p>Selecionar nova tag</p>
                                     <i class="bi bi-upload"></i>
                                 </div>
                             </label>
-                            <img id="previewTag<?= $post->id?>" src="" alt="Pré-visualização" style="display: none;" />
+                            <img id="previewTag<?= $post->id_post?>" src="" alt="Pré-visualização" style="display: none;" />
                         </div>
                     </div>
                 </div>
@@ -358,7 +358,7 @@
             <div class="dataLocalEditar">
                 <div class="localEditar">
                     <p>Local</p>
-                    <button onclick="abrirModalMapaEditar(<?= $post->id ?>, <?= (double)$post->latitude ?>, <?= (double)$post->longitude ?>)" class="inputLocalEditar" type="button">
+                    <button onclick="abrirModalMapaEditar(<?= $post->id_post ?>, <?= (double)$post->latitude ?>, <?= (double)$post->longitude ?>)" class="inputLocalEditar" type="button">
                         <i class="icone-geo-mapa bi bi-geo-alt-fill"></i>
                         <?=$post->local ?>
                     </button>
@@ -380,7 +380,7 @@
             </div>
             <div class="botoesEditar">
                 <button class="botaoModal botaoSalvar" type="submit">Salvar</button>
-                <button class="botaoModal botaoCancelar" type="button" onclick="fecharModal('fundoEditar<?= $post->id ?>','idModalEditar<?= $post->id ?>',<?= $post->id ?>)">Cancelar</button>
+                <button class="botaoModal botaoCancelar" type="button" onclick="fecharModal('fundoEditar<?= $post->id_post ?>','idModalEditar<?= $post->id_post ?>',<?= $post->id_post ?>)">Cancelar</button>
             </div>
         </form>
         <?php endforeach ?>
