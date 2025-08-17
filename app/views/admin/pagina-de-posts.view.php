@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="/public/css/modalEditar.css">
     <link rel="stylesheet" href="/public/css/modalCriar.css">
     <link rel="stylesheet" href="/public/css/modalExcluir.css">
+    <link rel="stylesheet" href="/public/css/select-localizacao.css">
     <link rel="stylesheet" href="../../../public/css/mapa.css" />
     <link rel="icon" type="image/png" href="../../../public/assets/ratao.png">
 </head>
@@ -122,9 +123,6 @@
         <!--Modal Criar-->
         <div onclick="fecharModal('fundo-modal-criar-post','id-modal-criar-post')" class="overlay-criar-post" id="fundo-modal-criar-post"></div>
         <form class="modal-criar-post" id="id-modal-criar-post" method="POST" action="/posts/create" enctype="multipart/form-data">
-            <input type="hidden" name="latitude" id="latitude" value="0" required>
-            <input type="hidden" name="longitude" id="longitude" value="0" required>
-            <input type="hidden" name="local" id="nomeDoLocalInput">
             <input type="hidden" name="usuarios_id" value="<?php echo ($_SESSION['id']); ?>">
             <div class="titulo-modal-criar-post">
                 <p>Criar Publicação</p>
@@ -179,13 +177,12 @@
             <div class="local-e-data-criar">
                 <div class="campo-local-criar-post">
                     <p>Local</p>
-                    <button 
-                        type="button"
-                        onclick="abrirModal('idModalMapa','idConteudoMapaM')" 
-                        class="btn-mapa-modal-criar">
-                        <i class="icone-geo-mapa bi bi-geo-alt-fill"></i>
-                        Selecionar localização
-                    </button>
+                    <select name="localizacao" id="localizacao" class="select-localizacao">
+                        <option value="" selected disabled>Selecione uma localização</option>
+                        <?php foreach($localizacoes as $localizacao): ?>
+                            <option value="<?= $localizacao->id_localizacao ?>"><?= $localizacao->descricao_local ?></option>
+                        <?php endforeach ?>
+                    </select>
                 </div>
                 <div class="campo-data-criar-post">
                     <p>Estilo</p>
@@ -272,10 +269,6 @@
                 <div class="dataLocalVisualizar">
                     <div class="localVisualizar">
                         <p class="TituloLocalVisualizar">Local</p>
-                        <button onclick="abrirModal('idMapaPost','idConteudoMapaP'); setTimeout(() => atualizaMapaPost(<?= (double)$post->latitude ?>, <?= (double)$post->longitude ?>), 100)" class="conteudoLocalVisualizar">
-                            <i class=" icone-geo-mapa bi bi-geo-alt-fill"></i>
-                            <?=$post->local ?>
-                        </button>
                     </div>
                     <div class="dataVisualizar">
                         <p class="visualizarData">Estilo</p>
@@ -290,14 +283,10 @@
         <!--Modal editar-->
         <div onclick="fecharModal('idModalEditar<?= $post->id_post ?>','fundoEditar<?= $post->id_post ?>')" class="modalEditar" id="fundoEditar<?= $post->id_post ?>"></div>
         <form class="editar" id="idModalEditar<?= $post->id_post ?>" method="POST" action="/posts/edit" enctype="multipart/form-data">
-            <input type="hidden" name="latitude" id="latitudeEditar<?= $post->id_post ?>" value="0" required>
-            <input type="hidden" name="longitude" id="longitudeEditar<?= $post->id_post ?>" value="0" required>
                 
             <input type="hidden" name="img_arte_atual" value="<?= $post->img_arte ?>">
             <input type="hidden" name="img_tag_atual" value="<?= $post->img_tag ?>">
-                
-            <input type="hidden" name="local" id="nomeDoLocalInputEditar<?= $post->id_post ?>" value="<?= $post->local ?>">
-                
+                                
             <input type="hidden" name="tipo" value="<?= $post->tipo ?>">
 
             <input type="hidden" name="id" value="<?= $post->id_post ?>">
@@ -358,10 +347,7 @@
             <div class="dataLocalEditar">
                 <div class="localEditar">
                     <p>Local</p>
-                    <button onclick="abrirModalMapaEditar(<?= $post->id_post ?>, <?= (double)$post->latitude ?>, <?= (double)$post->longitude ?>)" class="inputLocalEditar" type="button">
-                        <i class="icone-geo-mapa bi bi-geo-alt-fill"></i>
-                        <?=$post->local ?>
-                    </button>
+
                 </div>
                 <div class="dataEditar">
                     <p>Estilo</p>
