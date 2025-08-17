@@ -28,12 +28,8 @@
                     <div class="dados">
                         <p class="autor"><strong>Autor:</strong> <?=$post['autor']?></p>
                         <p class="data"><strong>Data:</strong> <?=(new DateTime($post['data']))->format('d/m/Y')?></p>
-                        <p class="local"><strong>Local:</strong> <?=$post['local']?></p>
+                        <p class="local"><strong>Local:</strong> <?=$post['descricao_local']?></p>
                         <div class="conteudo-btn-mapa-post">
-                            <button onclick="abrirModal('idMapaPost','idConteudoMapaP'); setTimeout(() => atualizaMapaPost(<?= (double)$post['latitude'] ?>, <?= (double)$post['longitude'] ?>), 100)" class="btn-local-mapa">
-                                <i class="bi bi-geo-alt-fill"></i>
-                                Visualizar no mapa
-                            </button>
                         </div>
                     </div>
                     <div class="tag">

@@ -13,6 +13,18 @@ class QueryBuilder
         $this->pdo = $pdo;
     }
 
+    public function findById($table, $id)
+    {
+        $sql = "SELECT p.*, l.descricao_local 
+                FROM {$table} p 
+                INNER JOIN localizacao_arte l ON p.id_localizacao = l.id_localizacao 
+                WHERE p.id_post = ?";
+        
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([$id]);
+        return $statement->fetch(\PDO::FETCH_ASSOC);
+    }
+
     public function selectOne($table, $parameters, $id=null){        
         $sql = sprintf(
             'SELECT * FROM %s WHERE %s = :%s',
@@ -168,13 +180,6 @@ class QueryBuilder
         } catch (Exception $e) {
             die($e->getMessage());
         }
-    }
-
-    public function findById($table, $id)
-    {
-        $statement = $this->pdo->prepare("SELECT * FROM {$table} WHERE id = ?");
-        $statement->execute([$id]);
-        return $statement->fetch(\PDO::FETCH_ASSOC);
     }
 
     public function verificarLogin($email,$senha){
