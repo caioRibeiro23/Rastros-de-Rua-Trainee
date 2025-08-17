@@ -53,20 +53,20 @@
                     </tr>
                     <?php foreach ($usuarios as $usuario): ?>
                     <tr class="Usuario">
-                        <td><?= $usuario->id; ?></td> 
+                        <td><?= $usuario->id_usuario; ?></td> 
                         <td><?= $usuario->nome; ?></td>
                         <td><?= $usuario->email; ?></td>
                             
                         <td class="operacoes" >
                             <div class="btn-operacao">
-                                <i class="bi bi-eye-fill" onclick="abrirModal('visualizar', <?= $usuario->id ?>)"></i>
+                                <i class="bi bi-eye-fill" onclick="abrirModal('visualizar', <?= $usuario->id_usuario ?>)"></i>
                             </div>
-                        <?php if ($_SESSION['adm'] == 1 || $usuario->id == $_SESSION['id']): ?>
+                        <?php if ($_SESSION['adm'] == 1 || $usuario->id_usuario == $_SESSION['id']): ?>
                             <div class="btn-operacao">
-                                <i class="bi bi-pencil-square" onclick="abrirModal('editar',<?= $usuario->id ?>)"></i>
+                                <i class="bi bi-pencil-square" onclick="abrirModal('editar',<?= $usuario->id_usuario ?>)"></i>
                             </div>
                             <div class="btn-operacao">
-                                <i class="bi bi-trash-fill" onclick="abrirModal('excluir',<?= $usuario->id ?>)"></i>
+                                <i class="bi bi-trash-fill" onclick="abrirModal('excluir',<?= $usuario->id_usuario ?>)"></i>
                             </div>
                         <?php else: ?>
                         <?php endif; ?>
@@ -117,7 +117,7 @@
             
             <?php foreach ($usuarios as $usuario): ?>
             <!-- Modal Visualizar -->
-            <div id="form-visualizar-usuario-<?= $usuario->id ?>" class="modalUsuario modalUsuarioVisualizar">
+            <div id="form-visualizar-usuario-<?= $usuario->id_usuario ?>" class="modalUsuario modalUsuarioVisualizar">
                 <div class="topo-info">
                     <div class="icone-info">
                         <i class="bi bi-person-circle"></i>
@@ -129,7 +129,7 @@
                 <div class="conteiner-info">
                     <div class="item-info">
                         <p class="titulo">ID:</p>
-                        <div class="box"><?= $usuario->id ?></div>
+                        <div class="box"><?= $usuario->id_usuario ?></div>
                     </div>
                     <div class="item-info">
                         <p class="titulo">Nome:</p>
@@ -141,13 +141,13 @@
                 </div>
                 </div>
                 <div class="botao-modal">
-                    <button class="botao" onclick="fecharModal('visualizar',<?= $usuario->id ?>)">fechar</button>
+                    <button class="botao" onclick="fecharModal('visualizar',<?= $usuario->id_usuario ?>)">fechar</button>
                 </div>
             </div>
             
             <!-- Modal Editar -->
-            <form id="form-editar-usuario-<?= $usuario->id ?>" action="/usuarios/editar_usuario" method="POST">
-                <div id="editar-<?= $usuario->id ?>" class="modalUsuario modalUsuarioEditar">
+            <form id="form-editar-usuario-<?= $usuario->id_usuario ?>" action="/usuarios/editar_usuario" method="POST">
+                <div id="editar-<?= $usuario->id_usuario ?>" class="modalUsuario modalUsuarioEditar">
                     <div class="topo-info">
                         <div class="icone-info">
                             <i class="bi bi-person-fill"></i>
@@ -159,7 +159,7 @@
                     </div>
                     <div class="conteiner-info">
                         <div class="item-info">
-                            <input type="hidden" value="<?= $usuario->id ?>" name="id">
+                            <input type="hidden" value="<?= $usuario->id_usuario ?>" name="id">
                             <p class="titulo">Nome:</p>
                             <input type="text" class="boxEditar" name="nome" value="<?= $usuario->nome ?>" required>
                         </div>
@@ -167,31 +167,31 @@
                             <p class="titulo">E-mail:</p>
                             <input type="text" class="boxEditar" name="email" value="<?= $usuario->email ?>" required>
                         </div>
-                        <div id="msg-email2-<?= $usuario->id ?>" style="display:none">
+                        <div id="msg-email2-<?= $usuario->id_usuario ?>" style="display:none">
                             <p>Esse e-mail já está sendo utilizado!</p>
                         </div>
                         <div class="item-info">
                             <p class="titulo">Senha:</p>
                             <div class="boxCriar senha-box-criar">
-                                <input class="boxSenha" name="senha" type="password" id="senha-user-editar-<?= $usuario->id ?>" placeholder="Digite a nova senha">
+                                <input class="boxSenha" name="senha" type="password" id="senha-user-editar-<?= $usuario->id_usuario ?>" placeholder="Digite a nova senha">
                                 <div class="icone-senha">
-                                    <i id="olho-user-editar-<?= $usuario->id ?>" class="bi bi-eye-fill" alt="Editar senha" onclick="mostrarSenha('senha-user-editar-<?= $usuario->id ?>','olho-user-editar-<?= $usuario->id ?>')"></i>
+                                    <i id="olho-user-editar-<?= $usuario->id_usuario ?>" class="bi bi-eye-fill" alt="Editar senha" onclick="mostrarSenha('senha-user-editar-<?= $usuario->id_usuario ?>','olho-user-editar-<?= $usuario->id_usuario ?>')"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="botao-modal">
-                        <button type="submit" class="botao botao-salvar" id="salvar-edicao-<?= $usuario->id ?>">salvar</button>
-                        <button type="button" class="botao botao-cancelar" id="cancelar-edicao-<?= $usuario->id ?>" onclick="fecharModal('editar',
-                        <?= $usuario->id ?>)">cancelar</button>
+                        <button type="submit" class="botao botao-salvar" id="salvar-edicao-<?= $usuario->id_usuario ?>">salvar</button>
+                        <button type="button" class="botao botao-cancelar" id="cancelar-edicao-<?= $usuario->id_usuario ?>" onclick="fecharModal('editar',
+                        <?= $usuario->id_usuario ?>)">cancelar</button>
                     </div>
                 </div>
             </form>
 
             <!-- Modal Excluir -->
-            <form id="form-excluir-usuario-<?= $usuario->id ?>" action="/usuarios/excluir_usuario" method="POST">
-            <div id="excluir-<?= $usuario->id ?>" class="modalUsuarioExcluir">
-                <input type="hidden" value="<?= $usuario->id ?>" name="id">
+            <form id="form-excluir-usuario-<?= $usuario->id_usuario ?>" action="/usuarios/excluir_usuario" method="POST">
+            <div id="excluir-<?= $usuario->id_usuario ?>" class="modalUsuarioExcluir">
+                <input type="hidden" value="<?= $usuario->id_usuario ?>" name="id">
                 <div class="topo-excluir">
                     <div class="icone-excluir">
                         <i class="bi bi-trash-fill"></i>
@@ -205,7 +205,7 @@
                 </div>
                 <div class="botoes-modal">
                     <button type="submit" class="excluir">Excluir</button>
-                    <button type="button" class="cancelar" onclick="fecharModal('excluir',<?= $usuario->id ?>)">Cancelar</button>
+                    <button type="button" class="cancelar" onclick="fecharModal('excluir',<?= $usuario->id_usuario ?>)">Cancelar</button>
                 </div>
             </div> 
             </form>
