@@ -83,12 +83,12 @@ public function selectAll($table, $inicio = 0, $itens_page = 10)
             $table,
             implode(',', array_keys($parameters)),
             ':' . implode(', :', array_keys($parameters))
-    );
+        );
         try {
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute($parameters);
         } catch (Exception $e) {
-            die($e->getMessage());
+            throw $e;
         }
     }
 
@@ -114,23 +114,26 @@ public function selectAll($table, $inicio = 0, $itens_page = 10)
     }
 
     public function delete($table, $id){
-        $sql = sprintf('DELETE FROM %s WHERE %s',
+        $idColumn = $table == 'posts' ? 'id_post' : 'id_usuario';
+        
+        $sql = sprintf('DELETE FROM %s WHERE %s = :id',
             $table,
-            'id = :id'
+            $idColumn
         );
         
         try {
-            if($table == 'usuarios'){
-                $posts_delete = sprintf('DELETE FROM %s WHERE %s',
+            if ($table == 'usuarios') {
+                $foreignKeyColumn = 'id_usuario';
+                $posts_delete = sprintf('DELETE FROM %s WHERE %s = :id',
                     'posts', 
-                    'usuarios_id = :id'  
+                    $foreignKeyColumn
                 );
                 $stmt = $this->pdo->prepare($posts_delete);
                 $stmt->execute(compact('id'));
             }
+            
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute(compact('id'));
-
         } catch (Exception $e) {
             die($e->getMessage());
         }
