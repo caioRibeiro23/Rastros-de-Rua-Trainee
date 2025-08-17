@@ -43,24 +43,24 @@ class QueryBuilder
     }
 
 
-public function selectAll($table, $inicio = 0, $itens_page = 10)
-{
-    $idColumn = $table == 'posts' ? 'id_post' : 'id_usuario';
-    
-    $sql = "SELECT * FROM {$table} ORDER BY {$idColumn} DESC LIMIT {$inicio}, {$itens_page}";
+    public function selectAll($table, $inicio = 0, $itens_page = 10)
+    {
+        $idColumn = $table == 'posts' ? 'id_post' : 'id_usuario';
+        
+        $sql = "SELECT * FROM {$table} ORDER BY {$idColumn} DESC LIMIT {$inicio}, {$itens_page}";
 
-    try {
-        $stmt = $this->pdo->prepare($sql);
+        try {
+            $stmt = $this->pdo->prepare($sql);
 
-        $stmt->execute();
+            $stmt->execute();
 
-        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+            return $stmt->fetchAll(\PDO::FETCH_OBJ);
 
-    } catch (Exception $e) {
+        } catch (Exception $e) {
 
-        die($e->getMessage());
+            die($e->getMessage());
+        }
     }
-}
 
     public function countAll($table)
     {
@@ -72,6 +72,19 @@ public function selectAll($table, $inicio = 0, $itens_page = 10)
 
             return intval($stmt->fetch(PDO::FETCH_NUM)[0]);
 
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function findLocalizacoes()
+    {
+        $sql = 'SELECT id_localizacao, descricao_local FROM localizacao_arte ORDER BY id_localizacao';
+
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
         } catch (Exception $e) {
             die($e->getMessage());
         }
