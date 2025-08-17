@@ -42,7 +42,9 @@ class QueryBuilder
 
 public function selectAll($table, $inicio = 0, $itens_page = 10)
 {
-    $sql = "SELECT * FROM {$table} ORDER BY id_post DESC LIMIT {$inicio}, {$itens_page}";
+    $idColumn = $table == 'posts' ? 'id_post' : 'id_usuario';
+    
+    $sql = "SELECT * FROM {$table} ORDER BY {$idColumn} DESC LIMIT {$inicio}, {$itens_page}";
 
     try {
         $stmt = $this->pdo->prepare($sql);
