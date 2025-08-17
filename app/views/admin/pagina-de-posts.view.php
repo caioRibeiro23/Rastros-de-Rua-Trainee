@@ -186,8 +186,8 @@
                 </div>
                 <div class="campo-data-criar-post">
                     <p>Estilo</p>
-                    <select class="data-criar-post" name="tipo" required>
-                        <option value="#" selected>Selecione um estilo</option>
+                    <select class="select-localizacao" name="tipo" required>
+                        <option value="#" selected disabled>Selecione um estilo</option>
                         <option value="1">Tag / Pixo</option>
                         <option value="2">Throw-up</option>
                         <option value="3">Bubble Style</option>
@@ -269,6 +269,7 @@
                 <div class="dataLocalVisualizar">
                     <div class="localVisualizar">
                         <p class="TituloLocalVisualizar">Local</p>
+                        <p class="data-visualizar-post"><?=$post->descricao_local?></p>
                     </div>
                     <div class="dataVisualizar">
                         <p class="visualizarData">Estilo</p>
@@ -347,11 +348,16 @@
             <div class="dataLocalEditar">
                 <div class="localEditar">
                     <p>Local</p>
-
+                    <select name="localizacao" id="localizacao" class="select-localizacao">
+                        <option value="" disabled>Selecione uma localização</option>
+                        <?php foreach($localizacoes as $localizacao): ?>
+                            <option value="<?= $localizacao->id_localizacao ?>" <?= $localizacao->id_localizacao == $post->id_localizacao ? 'selected' : '' ?>><?= $localizacao->descricao_local ?></option>
+                        <?php endforeach ?>
+                    </select>
                 </div>
                 <div class="dataEditar">
                     <p>Estilo</p>
-                    <select class="data-editar-post" name="tipo" required>
+                    <select class="select-localizacao" name="tipo" required>
                         <option value="#" selected><?=$post->tipo?></option>
                         <option value="1">Tag / Pixo</option>
                         <option value="2">Throw-up</option>

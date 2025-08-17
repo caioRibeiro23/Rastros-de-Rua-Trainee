@@ -25,7 +25,7 @@ class PostsController
 
         $localizacoes = App::get('database')->findLocalizacoes();
 
-        $posts = App::get('database')->selectAll('posts', $inicio, $itens_page);
+        $posts = App::get('database')->selectPosts($inicio, $itens_page);
         $total_pages = ceil($num_linhas /$itens_page);
         return view('admin/pagina-de-posts', [
                 'posts' => $posts,
@@ -57,8 +57,8 @@ class PostsController
             'autor'         => $_POST['autor'],
             'descricao'     => $_POST['descricao'],
             'materiais'     => $_POST['materiais'],
-            'id_localizacao'   => $_POST['localizacao'],
-            'id_usuario'   => $_POST['usuarios_id'],
+            'id_localizacao'=> $_POST['localizacao'],
+            'id_usuario'    => $_POST['usuarios_id'],
             'img_arte'      => $caminhoImg,
             'img_tag'       => $caminhoTag,
             'tipo'          => $_POST['tipo'],

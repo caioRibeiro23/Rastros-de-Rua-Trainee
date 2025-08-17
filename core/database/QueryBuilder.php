@@ -62,6 +62,24 @@ class QueryBuilder
         }
     }
 
+    public function selectPosts($inicio = 0, $itens_page = 10)
+    {
+        $sql = "SELECT * 
+                FROM posts p INNER JOIN localizacao_arte l
+                ON  p.id_localizacao = l.id_localizacao
+                ORDER BY id_post DESC LIMIT {$inicio}, {$itens_page}"
+            ;
+        
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        } catch (Exception $e) {
+
+            die($e->getMessage());
+        }
+    }
+
     public function countAll($table)
     {
         $sql = "select COUNT(*) from {$table}";
