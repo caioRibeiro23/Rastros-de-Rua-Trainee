@@ -25,7 +25,7 @@
 
             if($user){
                 session_start();
-                $_SESSION['id'] = $user->id;
+                $_SESSION['id'] = $user->id_usuario;
                 if ($user->email === 'adm@email.com') {
                     $_SESSION['adm'] = 1;
                 } else {
